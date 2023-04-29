@@ -1,0 +1,133 @@
+version: '3'
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./infrastructure/docker/phpfpm.Dockerfile
+      args:
+        - DA_DEBUG=true
+        - USER_ID=${USER_ID-1000}
+    volumes:
+      - ./:/var/www/html:cached
+      - ./infrastructure/docker/phpfpm-bashrc/.bashrc:/home/.bashrc:cached
+      - ./infrastructure/docker/phpfpm-bashrc/.bashrc:/home/www-data/.bashrc:cached
+      - ./infrastructure/docker/phpfpm:/usr/local/etc/php/custom.d
+      - /var/www/html/node_modules
+      - /var/www/html/public/fonts
+      - /var/www/html/public/images
+      - /var/www/html/public/img
+      - /var/www/html/public/js
+      - /var/www/html/public/vendor
+      - /var/www/html/.idea
+      - /var/www/html/infrastructure
+      - /var/www/html/cypress
+      - /var/www/html/cypress/resources/js
+      - /var/www/html/cypress/resources/sass
+      - /var/www/html/storage/mysql-data
+      - /var/www/html/storage/mysql-test-data
+      - /var/www/html/storage/nginx-logs
+    links:
+      - mysql
+      - mysql-test
+    image: php-fpm
+    environment:
+      XDEBUG_MODE: "${XDEBUG_MODE}"
+      DA_DEBUG: "true"
+      GIT_SSL_NO_VERIFY: "true"
+      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+      PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
+      XDEBUG_CONFIG: "client_host=${XDEBUG_REMOTE_HOST} client_port=9005 start_with_request=yes"
+    networks:
+      platform-net:
+        ipv4_address: 172.120.0.3
+
+  nginx:
+    image: nginx:1.21.6-alpine
+    links:
+      - php-fpm
+    volumes:
+      - ./public:/var/www/html/public:cached
+      - ./storage/app:/var/www/html/storage/app:cached
+      - ./resources/images/docs:/var/www/html/resources/images/docs:cached
+      - ./storage/nginx-logs:/var/log/nginx:cached
+      - ./infrastructure/docker/nginx/conf.d:/etc/nginx/conf.d:cached
+    ports:
+      - "80:80"
+    expose:
+      - 80
+    networks:
+      platform-net:
+        ipv4_address: 172.120.0.4
+
+  node:
+    build:
+      context: .
+      dockerfile: ./infrastructure/docker/node.Dockerfile
+    links:
+      - php-fpm
+      - nginx
+    volumes:
+      - ./:/var/www/html:cached
+      - /var/www/html/.git
+      - /var/www/html/.idea
+      - /var/www/html/app
+      - /var/www/html/bootstrap
+      - /var/www/html/config
+      - /var/www/html/infrastructure
+      - /var/www/html/routes
+      - /var/www/html/tests
+      - /var/www/html/vendor
+    working_dir: /var/www/html
+    tty: true
+    ports:
+      - ${NODE_PORT-8080}:${NODE_PORT-8080}
+      - 9000:9000
+    expose:
+      - ${NODE_PORT-8080}
+      - 9000
+    environment:
+      HOST: "0.0.0.0"
+      GIT_SSL_NO_VERIFY: "true"
+    networks:
+      platform-net:
+        ipv4_address: 172.120.0.5
+
+  mysql:
+    image: mysql:5.7.38
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=uhelp
+      - MYSQL_USER=uhelp
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3309:3306"
+    volumes:
+      - ${MYSQL_STORAGE-./storage/mysql-data}:/var/lib/mysql:cached
+    networks:
+      platform-net:
+        ipv4_address: 172.120.0.6
+
+  mysql-test:
+    image: mysql:5.7.38
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3308:3306"
+    volumes:
+      - ${MYSQL_TEST_STORAGE-./storage/mysql-test-data}:/var/lib/mysql
+    networks:
+      platform-net:
+        ipv4_address: 172.120.0.7
+
+networks:
+  platform-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.120.0.0/24
+    driver_opts:
+      com.docker.network.bridge.name: br_platform
