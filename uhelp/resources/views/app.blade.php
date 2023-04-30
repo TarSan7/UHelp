@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{--    @section('header')--}}
-{{--        @include('/header/head.blade.php')--}}
-{{--    @show--}}
+    @include('head')
+    <link href="{{ asset('css/landing.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -12,7 +11,7 @@
 
 {{--@include('Core::layouts.footer.footer')--}}
 <div id="app">
-    <example-component></example-component>
+    <landing />
 </div>
 </body>
 </html>

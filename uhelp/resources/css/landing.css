@@ -1,0 +1,344 @@
+.img1 {
+    height: 100vh;
+}
+
+.img2 {
+    margin-right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.img-height {
+    height: 80vh;
+}
+
+.screen-wraper {
+    display: flex;
+}
+
+.screen {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+}
+
+.yellow-background {
+    background: linear-gradient(to bottom, white 50%, #F4D06F 50%);
+}
+
+.light-yellow-background {
+    background: rgb(244, 208,111, 50%);
+}
+
+.first-screen-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-right: 100px;
+}
+
+.second-screen-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-top: 70px;
+    margin-left: 150px;
+}
+
+.small-margin-top {
+    margin-top: 20px;
+}
+
+.large-text {
+    font-family: 'Open Sans', serif;
+    font-weight: bold;
+    font-size: 60px;
+    line-height: 70px;
+    color: #4B4B4B;
+    margin-bottom: 50px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.small-title {
+    font-family: 'Open Sans', serif;
+    font-size: 60px;
+    line-height: 70px;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.footer-title {
+    font-family: 'Open Sans', serif;
+    font-size: 50px;
+    line-height: 70px;
+    color: white;
+}
+
+.small-text {
+    font-family: 'Open Sans', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 45px;
+    color: #4B4B4B;
+}
+
+.very-small-text {
+    font-family: 'Open Sans', serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: white;
+}
+
+.dark-text {
+    color: #4B4B4B;
+}
+
+.main-button {
+    background: #34466B;
+    border: 2px solid #34466B;
+    margin-top: 80px;
+    color: white;
+}
+
+.button {
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    border-radius: 100px;
+    padding: 15px 80px;
+}
+
+.second-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid #34466B;
+    margin-top: 80px;
+    color: #34466B;
+}
+
+.service-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-groups {
+    margin-top: 110px;
+    margin-left: 250px;
+}
+
+.right-groups {
+    margin-top: 110px;
+    margin-right: 250px;
+}
+
+.group1-img {
+    background-image: url("../img/group1.png");
+    padding: 200px 55px 40px 55px;
+}
+
+.group2-img {
+    background-image: url("../img/group2.png");
+    padding: 210px 55px 30px 80px;
+}
+
+.group3-img {
+    background-image: url("../img/group3.png");
+    padding: 235px 53px 35px 50px;
+}
+
+.group4-img {
+    background-image: url("../img/group4.png");
+    padding: 190px 53px 25px 50px;
+}
+
+.all-services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-services-img {
+    background-image: url("../img/border-services.png");
+    padding: 190px 50px 190px 50px;
+}
+
+.group {
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 35px;
+}
+
+.flows {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    background-image: url("../img/flows-background.png");
+    margin: 55px 120px;
+    padding: 150px 230px;
+}
+
+.fundraising-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px 80px;
+}
+
+.fundraisings {
+    width: 100%;
+}
+
+.footer {
+    height: 10vh;
+    background: #34466B;
+    padding: 50px 150px 30px 150px;
+}
+
+.footer-row, .footer-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-padding {
+    padding: 10px 20px;
+}
+
+.social {
+    margin-right: 10px;
+}
+
+.rights {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Open Sans', serif;
+    font-size: 14px;
+    color: white;
+}
+
+nav {
+    width: 500px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(52, 70, 107);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.sidemenu__btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: rgb(255, 255, 255, 0%);
+    border: none;
+    position: fixed;
+    z-index: 100;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    right: 20px;
+    top: 30px;
+}
+
+.sidemenu__btn span {
+    display: block;
+    width: 5px;
+    height: 5px;
+    margin: auto;
+    border-radius: 3px;
+    background: rgba(52, 70, 107);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all .4s ease;
+}
+
+span.top {
+    transform: translateX(-10px);
+}
+
+span.bottom {
+    transform: translateX(10px);
+}
+
+.sidemenu__btn.active {
+    background: rgba(52, 70, 107);
+}
+
+.sidemenu__btn.active .top {
+    background: white;
+    transform: rotate(-45deg);
+    width: 20px;
+}
+.sidemenu__btn.active .mid {
+    transform: translateX(-20px) rotate(360deg);
+    opacity: 0;
+}
+.sidemenu__btn.active .bottom {
+    background: white;
+    transform: rotate(45deg);
+    width: 20px;
+}
+
+.sidemenu__wrapper {
+    padding-top: 50px;
+}
+
+.sidemenu__list {
+    padding-top: 50px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidemenu__item a {
+    font-family: 'Open Sans', serif;
+    text-decoration: none;
+    line-height: 1.6em;
+    font-size: 1.6em;
+    padding: .5em;
+    display: block;
+    color: white;
+    transition: .4s ease;
+}
+
+.translateX-enter{
+    transform:translateX(700px);
+    opacity: 0;
+}
+
+.translateX-enter-active,.translateX-leave-active{
+    transform-origin: top left 0;
+    transition:.2s ease;
+}
+
+.translateX-leave-to{
+    transform: translateX(700px);
+    opacity: 0;
+}
+
