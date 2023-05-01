@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
     .vue()
     .css('resources/css/screen.css', 'public/css')
     .css('resources/css/landing.css', 'public/css')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .css('resources/css/login.css', 'public/css');

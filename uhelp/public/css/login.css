@@ -1,0 +1,132 @@
+.container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image:  url(/images/flag-of-ukraine.png?0f658c4dbb14eaf0b67528fb29d27e02);
+    height: 100vh;
+}
+
+.back-url {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 40px 40px 0 0;
+}
+
+.text {
+    font-family: 'Open Sans', serif;
+    font-size: 22px;
+    color: #4B4B4B;
+    line-height: 38px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 40px;
+    font-family: 'Open Sans', serif;
+    font-size: 50px;
+    color: #4B4B4B;
+}
+
+.input-label {
+    font-family: 'Open Sans', serif;
+    font-size: 26px;
+    color: #4B4B4B;
+    padding: 40px 0 15px 0;
+}
+
+#account {
+    width: 94%;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 42%;
+    width: 50%;
+    height: 90%;
+}
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 45%;
+    width: 50%;
+    height: 90%;
+}
+
+.field-group {
+    display: flex;
+    width: 100%;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 55%;
+}
+
+.small-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin-left: 3%;
+}
+
+.input-field {
+    background: #FFFFFF;
+    border: 1px solid #CDCDCD;
+    padding: 20px 30px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 480px;
+    font-family: 'Open Sans', serif;
+    font-size: 18px;
+}
+
+.small-input-field {
+    background: #FFFFFF;
+    border: 1px solid #CDCDCD;
+    padding: 20px 30px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 350px;
+    font-family: 'Open Sans', serif;
+    font-size: 18px;
+}
+
+.small-text {
+    margin-top: 10px;
+    font-family: 'Open Sans', serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: #4B4B4B;
+    text-decoration: none;
+}
+
+.main-button {
+    background: #34466B;
+    border: 2px solid #34466B;
+    margin-top: 80px;
+    color: white;
+
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    border-radius: 100px;
+    width: 109%;
+    padding: 10px 20px;
+}
+
+.button-reg {
+    width: 50%;
+}
+

@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('app', ['title' => 'UHelp']);
 });
+
+Route::get('/login', function () {
+    return view('login', ['title' => 'Login']);
+});
+
+Route::get('/register', function () {
+    return view('register', ['title' => 'Register']);
+});

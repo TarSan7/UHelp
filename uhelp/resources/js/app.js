@@ -21,6 +21,8 @@ window.Vue = require('vue').default;
 
 Vue.component('landing', require('./components/Landing.vue').default);
 Vue.component('slider', require('./components/Slider.vue').default);
+Vue.component('login', require('./components/Login.vue').default);
+Vue.component('register', require('./components/Register.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

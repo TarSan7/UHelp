@@ -15,7 +15,7 @@
                         <nav v-show="navOpen">
                             <div class="sidemenu__wrapper">
                                 <ul class="sidemenu__list">
-                                    <li class="sidemenu__item"><a href="">Login</a></li>
+                                    <li class="sidemenu__item"><a href="/login">Login</a></li>
                                     <li class="sidemenu__item"><a href="">Donations</a></li>
                                     <li class="sidemenu__item"><a href="">Volunteer map</a></li>
                                     <li class="sidemenu__item"><a href="">Helping the needy</a></li>

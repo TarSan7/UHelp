@@ -22,6 +22,9 @@ endif
 
 OS := $(shell uname)
 
+start:
+	php artisan serve
+
 env:
 	cp ./.env.example ./.env
 
