@@ -52,3 +52,13 @@ body {
     margin-bottom: 50px;
     margin-top: 30px;
 }
+
+.help {
+    padding: 5px 0 0 10px;
+    font-family: 'Open Sans', serif;
+    font-size: 12px;
+}
+
+.is-danger {
+    color: red;
+}

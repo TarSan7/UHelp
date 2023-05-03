@@ -5336,8 +5336,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Login"
+  name: "Login",
+  data: function data() {
+    return {
+      email: '',
+      password: '',
+      errors: new _app__WEBPACK_IMPORTED_MODULE_0__.Errors()
+    };
+  },
+  methods: {
+    login: function login(event) {
+      var _this = this;
+      axios.post('/login', {
+        'email': this.email,
+        'password': this.password
+      })["catch"](function (error) {
+        return _this.errors.record(error.response.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5354,7 +5374,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Register"
+  name: "Register",
+  data: function data() {
+    return {
+      name: String,
+      email: String,
+      password: String,
+      rePassword: String,
+      phone: String,
+      accountType: Number
+    };
+  },
+  props: {
+    accountTypes: {
+      type: Array,
+      "default": []
+    }
+  }
 });
 
 /***/ }),
@@ -5620,27 +5656,22 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
   return _c("div", {
     staticClass: "container"
-  }, [_c("div", {
-    staticClass: "back-url"
-  }, [_c("div", {
-    staticClass: "text",
+  }, [_vm._m(0), _vm._v(" "), _c("form", {
+    staticClass: "login-form",
     attrs: {
-      onclick: "window.location.replace('/')"
+      method: "POST"
+    },
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.login.apply(null, arguments);
+      },
+      keydown: function keydown($event) {
+        return _vm.errors.clear($event.target.name);
+      }
     }
-  }, [_vm._v("Go back")]), _vm._v(" "), _c("img", {
-    attrs: {
-      src: __webpack_require__(/*! ../../img/arrow-forward.svg */ "./resources/img/arrow-forward.svg"),
-      onclick: "window.location.replace('/')"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "login-form"
   }, [_c("div", {
     staticClass: "title"
   }, [_vm._v("Login")]), _vm._v(" "), _c("div", {
@@ -5651,11 +5682,30 @@ var staticRenderFns = [function () {
       "for": "email"
     }
   }, [_vm._v("Email")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
     staticClass: "input-field",
     attrs: {
       type: "email",
-      name: "email",
-      id: "email"
+      name: "email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("span", {
+    staticClass: "help is-danger",
+    domProps: {
+      textContent: _vm._s(_vm.errors.get("email"))
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "input-label",
@@ -5663,11 +5713,30 @@ var staticRenderFns = [function () {
       "for": "password"
     }
   }, [_vm._v("Password")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
     staticClass: "input-field",
     attrs: {
       type: "password",
-      name: "password",
-      id: "password"
+      name: "password"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("span", {
+    staticClass: "help is-danger",
+    domProps: {
+      textContent: _vm._s(_vm.errors.get("password"))
     }
   }), _vm._v(" "), _c("a", {
     staticClass: "small-text",
@@ -5679,13 +5748,34 @@ var staticRenderFns = [function () {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Log In")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Log In")]), _vm._v(" "), _vm._m(1)])])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "back-url"
+  }, [_c("div", {
+    staticClass: "text",
+    attrs: {
+      onclick: "window.location.replace('/')"
+    }
+  }, [_vm._v("Go back")]), _vm._v(" "), _c("img", {
+    attrs: {
+      src: __webpack_require__(/*! ../../img/arrow-forward.svg */ "./resources/img/arrow-forward.svg"),
+      onclick: "window.location.replace('/')"
+    }
+  })]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
     staticClass: "small-text"
   }, [_vm._v("\n                Don`t have an account?\n                "), _c("a", {
     attrs: {
       href: "/register"
     }
-  }, [_vm._v("Register")])])])])]);
+  }, [_vm._v("Register")])]);
 }];
 render._withStripped = true;
 
@@ -5707,26 +5797,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
   return _c("div", {
     staticClass: "container"
-  }, [_c("div", {
-    staticClass: "back-url"
-  }, [_c("div", {
-    staticClass: "text",
-    attrs: {
-      onclick: "window.location.replace('/')"
-    }
-  }, [_vm._v("Go back")]), _vm._v(" "), _c("img", {
-    attrs: {
-      src: __webpack_require__(/*! ../../img/arrow-forward.svg */ "./resources/img/arrow-forward.svg"),
-      onclick: "window.location.replace('/')"
-    }
-  })]), _vm._v(" "), _c("div", {
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "form-register"
   }, [_c("div", {
     staticClass: "title"
@@ -5740,11 +5813,26 @@ var staticRenderFns = [function () {
       "for": "name"
     }
   }, [_vm._v("Name")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
     staticClass: "small-input-field",
     attrs: {
       type: "text",
       name: "name",
       id: "name"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "input-label",
@@ -5752,11 +5840,26 @@ var staticRenderFns = [function () {
       "for": "email"
     }
   }, [_vm._v("Email")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
     staticClass: "small-input-field",
     attrs: {
       type: "email",
       name: "email",
       id: "email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "input-label",
@@ -5764,11 +5867,26 @@ var staticRenderFns = [function () {
       "for": "password"
     }
   }, [_vm._v("Password")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
     staticClass: "small-input-field",
     attrs: {
       type: "password",
       name: "password",
       id: "password"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "small-fields"
@@ -5783,17 +5901,39 @@ var staticRenderFns = [function () {
       name: "account",
       id: "account"
     }
-  }), _vm._v(" "), _c("label", {
+  }, _vm._l(_vm.accountTypes, function (type, index) {
+    return _c("option", {
+      key: index,
+      domProps: {
+        value: type
+      }
+    });
+  }), 0), _vm._v(" "), _c("label", {
     staticClass: "input-label",
     attrs: {
       "for": "phone"
     }
   }, [_vm._v("Phone number")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.phone,
+      expression: "phone"
+    }],
     staticClass: "small-input-field",
     attrs: {
       type: "text",
       name: "phone",
       id: "phone"
+    },
+    domProps: {
+      value: _vm.phone
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.phone = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "input-label",
@@ -5801,24 +5941,60 @@ var staticRenderFns = [function () {
       "for": "password"
     }
   }, [_vm._v("Confirm password")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.rePassword,
+      expression: "rePassword"
+    }],
     staticClass: "small-input-field",
     attrs: {
       type: "password",
       name: "password",
       id: "password"
+    },
+    domProps: {
+      value: _vm.rePassword
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.rePassword = $event.target.value;
+      }
     }
   })])]), _vm._v(" "), _c("button", {
     staticClass: "main-button button-reg",
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Register")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Register")]), _vm._v(" "), _vm._m(1)])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "back-url"
+  }, [_c("div", {
+    staticClass: "text",
+    attrs: {
+      onclick: "window.location.replace('/')"
+    }
+  }, [_vm._v("Go back")]), _vm._v(" "), _c("img", {
+    attrs: {
+      src: __webpack_require__(/*! ../../img/arrow-forward.svg */ "./resources/img/arrow-forward.svg"),
+      onclick: "window.location.replace('/')"
+    }
+  })]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
     staticClass: "small-text"
   }, [_vm._v("\n            Already have an account?\n            "), _c("a", {
     attrs: {
       href: "/login"
     }
-  }, [_vm._v("Log in")])])])]);
+  }, [_vm._v("Log in")])]);
 }];
 render._withStripped = true;
 
@@ -5894,8 +6070,19 @@ render._withStripped = true;
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Errors": () => (/* binding */ Errors)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -5932,6 +6119,31 @@ window.onload = function () {
     el: '#app'
   });
 };
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+    this.errors = {};
+  }
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      delete this.errors[field];
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors.errors;
+    }
+  }]);
+  return Errors;
+}();
 
 /***/ }),
 
