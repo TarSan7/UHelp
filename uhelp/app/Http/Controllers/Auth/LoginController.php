@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -35,12 +37,16 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only(['email', 'password']);
-        dd($credentials);
+        $user        = User::where('email', $request['email'])->get()->first();
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+        if ($user->approved && Auth::attempt($credentials)) {
+            return new JsonResponse([], 201);
         }
 
-        return ['message' => 'Auth failed'];
+        return response()->json([
+            'errors' => [
+                'button' => ['Incorrect email or password or your account wasn\'t approved']
+            ]
+        ])->setStatusCode(422);
     }
 }

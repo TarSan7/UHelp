@@ -27,8 +27,8 @@
                 <span class="help is-danger" v-text="errors.get('password')"></span>
                 <a href="/" class="small-text">Forgot password?</a>
 
-
                 <button type="submit" class="main-button">Log In</button>
+                <span class="help is-danger" v-text="errors.get('button')"></span>
                 <div class="small-text">
                     Don`t have an account?
                     <a href="/register" class="">Register</a>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {Errors} from "../app";
+import {Errors} from "../Errors";
 
 export default {
     name: "Login",
@@ -57,7 +57,12 @@ export default {
             axios.post('/login', {
                 'email': this.email,
                 'password': this.password
-            }).catch(error => this.errors.record(error.response.data));
+            }).catch(error => this.errors.record(error.response.data.errors))
+                .then(e => {
+                    if (!e.data.length) {
+                        window.location.href = "/fundraising"
+                    }
+                });
         }
     }
 }

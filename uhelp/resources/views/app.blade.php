@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     @include('head')
-    <link href="{{ asset('css/landing.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ mix('/css/landing.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body>
 
 <div id="app">
-    <landing />
+    <landing :slides="{{ $fundraising }}"/>
 </div>
 </body>
 </html>

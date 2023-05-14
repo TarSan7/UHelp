@@ -16,7 +16,7 @@
                             <div class="sidemenu__wrapper">
                                 <ul class="sidemenu__list">
                                     <li class="sidemenu__item"><a href="/login">Login</a></li>
-                                    <li class="sidemenu__item"><a href="">Donations</a></li>
+                                    <li class="sidemenu__item"><a href="/fundraising">Donations</a></li>
                                     <li class="sidemenu__item"><a href="">Volunteer map</a></li>
                                     <li class="sidemenu__item"><a href="">Helping the needy</a></li>
                                 </ul>
@@ -91,7 +91,7 @@
         <div class="screen light-yellow-background">
             <div class="fundraising-block">
                 <div class="small-title dark-text">Active fundraisings</div>
-                <slider />
+                <slider :slides="slides" :visible-slides="3" :width="200" :is-button="true" />
             </div>
         </div>
         <div class="footer">
@@ -114,15 +114,21 @@
 </template>
 
 <script>
+import Slider from "./Slider.vue";
+
     export default {
+        components: {
+            Slider
+        },
+
+        props: {
+            slides: Array
+        },
+
         data() {
             return {
                 navOpen: false,
             }
         },
-
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>

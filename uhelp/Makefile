@@ -2,12 +2,14 @@ include .env
 export
 
 ifeq ($(SKIP_DOCKER), true)
-    NODE := yarn
+	DOCKER_COMPOSE :=
+    NODE := npm
     ARTISAN := php artisan
     MYSQL :=
 else
-    NODE := node yarn
-    ARTISAN := php artisan
+	DOCKER_COMPOSE := sudo docker-compose
+    NODE := $(DOCKER_COMPOSE) exec node yarn
+    ARTISAN := sudo docker-compose exec app php artisan
     MYSQL :=  -T mysql
 endif
 
@@ -22,11 +24,39 @@ endif
 
 OS := $(shell uname)
 
-start:
-	php artisan serve
-
 env:
 	cp ./.env.example ./.env
+
+ps:
+	@$(DOCKER_COMPOSE) ps
+
+start:
+	@$(DOCKER_COMPOSE) up -d
+
+stop:
+	@$(DOCKER_COMPOSE) stop
+
+migrate:
+	@$(ARTISAN) migrate
+
+cache-clear:
+	@$(ARTISAN) cache:clear
+
+seed:
+	@$(ARTISAN) db:seed
+
+node-install:
+	@$(NODE) update
+
+node-build:
+	@$(NODE) run build
+
+node-watch:
+	@$(NODE) run watch
+
+node-dev:
+	@$(NODE) run dev
+
 
 permissions:
 	@$(FPM) chmod -R 777 storage
@@ -34,18 +64,12 @@ permissions:
 keygen:
 	@$(ARTISAN) key:generate
 
-cache-clear:
-	@$(ARTISAN) cache:clear
-	@$(ARTISAN) view:clear
-
 clear:
 	@$(ARTISAN) optimize:clear
 
 truncate:
 	@$(ARTISAN) db:wipe
 
-migrate:
-	@$(ARTISAN) migrate
 
 migrate-test:
 	@$(ARTISAN) migrate --env=testing
@@ -56,16 +80,12 @@ rollback:
 create-test-db:
 	@$(ARTISAN) test:clean-test-database --env=testing
 
-test-db: clear create-test-db
-
 fresh:
 	@$(ARTISAN) migrate:fresh
 
 fresh-test:
 	@$(ARTISAN) migrate:fresh --env=testing
 
-seed:
-	@$(ARTISAN) db:seed
 
 seed-test:
 	@$(ARTISAN) db:seed --env=testing
@@ -80,11 +100,6 @@ reset-db: truncate migrate seed
 
 reset-db-test: fresh-test seed-test
 
-npm-install:
-	npm install
-
-npm-build:
-	npm run build
 
 npm-serve:
 	npm run serve-container
@@ -92,8 +107,6 @@ npm-serve:
 node-watch-poll:
 	@$(NODE) run watch-poll
 
-npm-dev:
-	npm run dev
 
 node-test:
 	@$(NODE) run test

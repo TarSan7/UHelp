@@ -1,0 +1,77 @@
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 100px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #34466B; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 120px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.navlinks {
+    list-style: none;
+    position: relative;
+    padding: 0;
+}
+
+.navlinks li {
+    padding: 15px 27px;
+}
+
+.navlinks li:hover {
+    background-color: rgb(255, 255, 255, 0.3);
+}
+
+.topnav {
+    display: flex;
+    justify-content: end;
+    padding-top: 20px;
+    padding-right: 40px;
+}
+
+.cabinet {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    display: inline-block;
+    position: relative;
+    padding-left: 20px;
+}
+
+.dropdown-content {
+    z-index: 100;
+    background-color: #FFFFFF;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    border-radius: 10px;
+    width: 250px;
+    padding: 10px;
+    overflow: visible;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.text {
+    font-family: 'Open Sans', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 0 10px;
+}
+
+.dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: rgb(52, 70, 107);
+}

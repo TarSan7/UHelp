@@ -1,0 +1,86 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: uhelp
+    container_name: uhelp-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - uhelp
+
+  db:
+    image: mysql:8.0
+    container_name: uhelp-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - uhelp
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    restart: always
+    ports:
+      - 8090:80
+    depends_on:
+      - db
+    networks:
+      - uhelp
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: uhelp-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - uhelp
+
+  node:
+    image: node:16.13.0
+    working_dir: /var/www
+    links:
+      - app
+      - nginx
+    volumes:
+      - ./:/var/www
+    ports:
+      - 9000:9000
+    tty: true
+    environment:
+      HOST: "0.0.0.0"
+      GIT_SSL_NO_VERIFY: "true"
+    networks:
+      - uhelp
+
+
+networks:
+  uhelp:
+    driver: bridge

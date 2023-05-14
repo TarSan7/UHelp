@@ -3,54 +3,57 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+import { createApp } from 'vue';
+import Landing from './components/Landing.vue';
+import Slider from './components/Slider.vue';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
+import Archive from './components/Archive.vue';
+import Fundraising from "./components/fundraising/Fundraising.vue";
+import FundraisingDetails from "./components/fundraising/FundraisingDetails.vue";
+import AnnouncementDetails from "./components/announcements/AnnouncementDetails.vue";
+import MyFundraising from "./components/fundraising/MyFundraising.vue";
+import CreateEditFundraising from "./components/fundraising/CreateEditFundraising.vue";
+import Announcements from "./components/announcements/Announcements.vue";
+import MyAnnouncements from "./components/announcements/MyAnnouncements.vue";
+import CreateEditAnnouncement from "./components/announcements/CreateEditAnnouncement.vue";
+import CloseAnnouncement from "./components/announcements/CloseAnnouncement.vue";
+import CloseFundraising from "./components/fundraising/CloseFundraising.vue";
+import UserLayout from "./components/UserLayout.vue";
+import Members from "./components/Members.vue";
+import Member from "./components/Member.vue";
+import MapItems from "./components/MapItems.vue";
+import MapAdd from "./components/MapAdd.vue";
+import PrimeVue from 'primevue/config';
+import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/themes/lara-light-blue/theme.css';
 require('./bootstrap');
 
-window.Vue = require('vue').default;
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('landing', require('./components/Landing.vue').default);
-Vue.component('slider', require('./components/Slider.vue').default);
-Vue.component('login', require('./components/Login.vue').default);
-Vue.component('register', require('./components/Register.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 window.onload = function () {
-    let app = new Vue({
-        el: '#app',
-    });
-}
-
-export class Errors {
-    constructor() {
-        this.errors = {}
-    }
-    get(field) {
-        if (this.errors[field]) {
-            return this.errors[field][0];
+    let app=createApp({
+        components: {
+            Landing,
+            Slider,
+            Login,
+            Register,
+            Archive,
+            Fundraising,
+            FundraisingDetails,
+            MyFundraising,
+            UserLayout,
+            CreateEditFundraising,
+            Announcements,
+            MyAnnouncements,
+            CreateEditAnnouncement,
+            CloseAnnouncement,
+            CloseFundraising,
+            AnnouncementDetails,
+            Members,
+            Member,
+            MapItems,
+            MapAdd,
         }
-    }
-
-    clear(field) {
-        delete this.errors[field];
-    }
-
-    record(errors) {
-        this.errors = errors.errors;
-    }
+    })
+    app.use(PrimeVue);
+    app.mount("#app")
 }

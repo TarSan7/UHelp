@@ -9,3 +9,4 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 <link href="{{ asset('css/screen.css') }}" rel="stylesheet" type="text/css">
+<script src="{{ mix('/js/app.js') }}"></script>

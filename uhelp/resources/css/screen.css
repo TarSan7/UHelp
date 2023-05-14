@@ -18,12 +18,210 @@ body {
     background: white;
     border-radius: 50px;
     width: 90%;
-    height: auto;
+    max-height: 500px;
+}
+
+.back-url {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 40px 40px 0 0;
+}
+
+.logo {
+    width: 80px;
+}
+
+.logo-a {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+}
+
+.center-position {
+    margin-left: 100px;
+}
+
+.padding-top-button {
+    padding-top: 30px;
+}
+
+.fundraising {
+    margin: 0 50px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-between;
+}
+
+hr {
+    margin: 40px 0 0 120px;
+    width: 79%;
+    color: black;
+    height: 2px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 10%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 80%;
+}
+
+.start {
+    margin-left: 120px;
+}
+
+.end {
+    margin-right: 120px;
+}
+
+.create-fundr {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+
+.fundr-info {
+    width: 50%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.active-li {
+    background-color: rgb(255, 255, 255, 0.2);
+}
+
+.padding-small {
+    padding: 10px 10px;
 }
 
 .slide-img {
     margin-top: 40px;
     margin-bottom: 30px;
+}
+
+.donate {
+    height: 300px;
+}
+
+.red {
+    color: #ce011c;
+}
+
+.donate-button {
+    text-decoration: none;
+    background: #34466B;
+    border: 2px solid #34466B;
+    margin-top: 20px;
+    width: 280px;
+    color: white;
+}
+
+.page-title-text {
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    margin-left: 70px;
+}
+
+.slot-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-layout {
+    margin-top: 40px;
+    display: flex;
+    width: 15%;
+    justify-content: space-between;
+}
+
+.center {
+    margin-top: 10px;
+    align-items: center;
+}
+
+.width-slider {
+    margin-top: 50px;
+    max-width: 600px;
+}
+
+.red-bacgr {
+    color: #dc1c1c;
+}
+.green-bacgr {
+    color: #0d8514;
+}
+
+.label-text {
+    margin: 0 0 10px 0;
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.justify-content-space-between {
+    justify-content: space-between;
+}
+
+.italic-text {
+    font-family: 'Open Sans', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.slot-goal-text {
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.slot-title-text {
+    opacity: 1;
+    font-family: 'Open Sans', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.slot-configuration {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 50px;
+    align-items: center;
+}
+
+.large-margin {
+    margin-bottom: 70px !important;
 }
 
 .slide-title-text {
@@ -61,4 +259,9 @@ body {
 
 .is-danger {
     color: red;
+}
+
+.slot-style {
+    border-radius: 30px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }

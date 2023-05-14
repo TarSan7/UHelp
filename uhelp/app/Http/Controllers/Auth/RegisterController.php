@@ -3,42 +3,35 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Models\AccountType;
+use App\Models\Document;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
     /**
-     * Where to redirect users after registration.
+     * Handle a registration request for the application.
      *
-     * @var string
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function register(Request $request)
     {
-        $this->middleware('guest');
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        !$user->approved || Auth::attempt(['email' => $user->email, 'password' => $request->get('password')]);
+
+        return new JsonResponse(['message' => 'Admin will check your account and contact.'], 201);
     }
 
     /**
@@ -50,9 +43,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone'    => ['required', 'string', 'regex:/[0-9]{10}/'],
+            'document' => ['required', 'string'],
         ]);
     }
 
@@ -62,12 +57,43 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = null;
+
+        DB::transaction(function () use (&$user, $data) {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'password' => Hash::make($data['password']),
+                'approved' => 0,
+                'account_type_id' => $data['accountId'],
+            ]);
+
+            Document::create([
+                'account_type_id' => $data['accountId'],
+                'user_id' => $user->id,
+                'document' => 'documents/' . $user->id,
+                'status' => Document::SENT_STATUS,
+            ]);
+
+            $base64Image = str_replace('data:image/png;base64,', '', $data['document']);
+            $base64Image = str_replace(' ', '+', $base64Image);
+            Storage::put('documents/' . $user->id . '.png', base64_decode($base64Image));
+        });
+
+        return $user;
+    }
+
+    public function getRegister()
+    {
+        if (Auth::user()) {
+            return redirect('/fundraising');
+        }
+
+        $accountTypes = AccountType::REGISTER_ACCOUNT_TYPES;
+
+        return view('register', ['title' => 'Register', 'accountTypes' => json_encode($accountTypes)]);
     }
 }
