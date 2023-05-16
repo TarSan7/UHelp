@@ -122,10 +122,10 @@ class HelpsController extends Controller
             foreach ($data['images'] as $key => $image) {
                 $base64Image = str_replace('data:image/png;base64,', '', $image);
                 $base64Image = str_replace(' ', '+', $base64Image);
-                Storage::put('announcement/' . $announcement->id . '/' . substr($image, 0, 10) .'.png', base64_decode($base64Image));
+                Storage::put('announcement/' . $announcement->id . '/' . $key .'.png', base64_decode($base64Image));
 
                 AnnouncementImage::updateOrCreate([
-                    'path'            => 'announcement/' . $announcement->id . '/' . substr($image, 0, 10) .'.png',
+                    'path'            => 'announcement/' . $announcement->id . '/' . $key .'.png',
                     'is_main'         => false,
                     'announcement_id' => $announcement->id,
                 ]);
@@ -196,7 +196,7 @@ class HelpsController extends Controller
     {
         $announcement = Announcements::where('id', $id)->get();
         $images       = AnnouncementImage::where('announcement_id', $id)->pluck('path')->toArray();
-        $volunteer    = $announcement[0]->user;
+        $victim       = $announcement[0]->user;
 
         $images = array_map(function ($url) {
             $img = Storage::get($url);
@@ -209,6 +209,7 @@ class HelpsController extends Controller
             'user'         => Auth::check() ? json_encode(Auth::user()->toArray()) : null,
             'announcement' => json_encode($announcement->toArray()),
             'images'       => json_encode($images),
+            'victim'       => json_encode($victim)
         ]);
     }
 }

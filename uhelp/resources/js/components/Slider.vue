@@ -19,7 +19,7 @@
                         </div>
                         <div v-if="slide.title" class="vueperslide__title slide-title-text">{{ slide.title }}</div>
                         <div v-if="slide.content" class="slide-text">{{ slide.content }}</div>
-                        <button v-if="isButton" class="slide-button">Help</button>
+                        <button v-if="isButton" class="slide-button" @click="redirect(slide.id)">Допомогти</button>
                     </div>
                 </template>
             </vueper-slide>
@@ -48,29 +48,10 @@ export default {
         visibleSlides: Number,
     },
 
-    data: () => ({
-        // slides: [
-        //     {
-        //         title: 'Drones for the military',
-        //         content: 'We need to raise funds for drones for the 1st unit. ' +
-        //             'Join the fundraiser and help our boys better understand the situation at the front.'
-        //     },
-        //     {
-        //         title: 'Drones for the military',
-        //         content: 'We need to raise funds for drones for the 1st unit. ' +
-        //             'Join the fundraiser and help our boys better understand the situation at the front.'
-        //     },
-        //     {
-        //         title: 'Drones for the military',
-        //         content: 'We need to raise funds for drones for the 1st unit. ' +
-        //             'Join the fundraiser and help our boys better understand the situation at the front.'
-        //     },
-        //     {
-        //         title: 'Drones for the military',
-        //         content: 'We need to raise funds for drones for the 1st unit. ' +
-        //             'Join the fundraiser and help our boys better understand the situation at the front.'
-        //     }
-        // ]
-    })
+    methods: {
+        redirect(id) {
+            window.location.href = '/details-fundraising/' + id;
+        }
+    }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <UserLayout :user="user" :active="'announcements'">
         <div class="center-position">
-            <div class="page-title-text">Announcements</div>
+            <div class="page-title-text">Об'яви про допомогу</div>
             <GridLayout
                 v-model:layout="layout"
                 :col-num="3"
@@ -26,7 +26,7 @@
                     <div class="slot-configuration">
                         <div class="slot-title-text">{{ item.title }}</div>
                         <div class="slot-text">{{ item.shortInfo }}</div>
-                        <button class="slide-button large-margin" @click="toogle(item.id)">Help</button>
+                        <button class="slide-button large-margin" @click="toogle(item.id)">Допомогти</button>
                     </div>
                 </GridItem>
             </GridLayout>

@@ -1,7 +1,7 @@
 <template>
     <UserLayout :user="user" :active="'fundraising'">
         <div class="center-position">
-            <div class="page-title-text">Members</div>
+            <div class="page-title-text">Користувачі</div>
             <div class="fundraising">
                 <DataTable
                     :value="members"
@@ -11,18 +11,18 @@
                     paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     tableStyle="min-width: 102rem"
                 >
-                    <Column field="name" header="Name"></Column>
-                    <Column field="email" header="Email"></Column>
-                    <Column field="account_type_id" header="Account type"></Column>
-                    <Column field="phone" header="Phone number"></Column>
-                    <Column field="approved" header="Approved">
+                    <Column field="name" header="Ім'я"></Column>
+                    <Column field="email" header="Емейл"></Column>
+                    <Column field="account_type_id" header="Тип акаунта"></Column>
+                    <Column field="phone" header="Номер телефону"></Column>
+                    <Column field="approved" header="Статус акаунта">
                         <template #body="{data}">
-                            <p :class="data.approved ? 'green-bacgr' : 'red-bacgr'">{{ data.approved === 1 ? "Watched" : "To watch" }}</p>
+                            <p :class="data.approved ? 'green-bacgr' : 'red-bacgr'">{{ data.approved === 1 ? "Переглянуто" : "До перегляду" }}</p>
                         </template>
                     </Column>
                     <Column field="id"  style="width: 15%">
                         <template #body="{data}" class="justify-content-space-between">
-                            <Button v-if="!data.approved" severity="secondary" @click="toogle(data)">Check</Button>
+                            <Button v-if="!data.approved" severity="secondary" @click="toogle(data)">Перевірити</Button>
                         </template>
                     </Column>
                 </DataTable>

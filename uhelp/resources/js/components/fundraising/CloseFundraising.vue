@@ -1,19 +1,19 @@
 <template>
     <UserLayout :user="user" :active="'fundraising'">
         <div class="center-position">
-            <div class="page-title-text">Close Fundraising</div>
+            <div class="page-title-text">Закрити збір</div>
 
             <form method="POST" class="create-fundr" @keydown="errors.clear($event.target.name)">
                 <div class="flex start">
                     <div class="create-fundr">
-                        <label class="label-text" for="cause">Close cause</label>
+                        <label class="label-text" for="cause">Причина закриття</label>
                         <InputText id="cause" v-model="cause"/>
                         <span class="help is-danger" v-text="errors.get('cause')"></span>
                     </div>
                 </div>
                 <div class="buttons padding-top-button start">
-                    <Button severity="secondary" @click="create">Save</Button>
-                    <Button severity="secondary" @click="back">Back</Button>
+                    <Button severity="secondary" @click="create">Зберегти</Button>
+                    <Button severity="secondary" @click="back">Повернутись</Button>
                 </div>
             </form>
         </div>

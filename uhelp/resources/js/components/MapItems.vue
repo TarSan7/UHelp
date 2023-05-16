@@ -1,7 +1,7 @@
 <template>
     <UserLayout :user="user" :active="'map'">
         <div class="center-position">
-            <div class="page-title-text">Blood donations centers map</div>
+            <div class="page-title-text">Центри донорства крові</div>
             <div class="fundraising padding-top-button">
                 <GoogleMap api-key="AIzaSyBJ_0NDX02aikKLJ12ckgm0pHY7ZwzTzSc" style="width: 100%; height: 700px" :center="{lat:50.383022, lng:31.1828699}" :zoom="7">
 
@@ -22,7 +22,7 @@
                         </InfoWindow>
                     </Marker>
                 </GoogleMap>
-                <Button v-if="user['account_type_id'] === 2" severity="secondary" @click="toogle">Add</Button>
+                <Button v-if="user['account_type_id'] === 2" severity="secondary" @click="toogle">Додати</Button>
             </div>
         </div>
     </UserLayout>

@@ -1,7 +1,7 @@
 <template>
     <UserLayout :user="user" :active="'announcements'">
         <div class="start">
-            <div class="page-title-text">Announcement Details</div>
+            <div class="page-title-text">Деталі об'яви</div>
             <div class="flex">
                 <div class="width-slider fundr-info">
                     <Carousel :value="images" :numVisible="1" :numScroll="1">
@@ -13,10 +13,10 @@
                 <div class="fundr-info">
                     <div class="label-text padding-small">{{ announcement[0]['title'] }}</div>
                     <div class="slot-text padding-small">{{ announcement[0]['info'] }}</div>
-                    <div class="label-text padding-small">Victim information to contact:</div>
-                    <div class="italic-text padding-small">Name: {{ user['name'] }}</div>
-                    <div class="italic-text padding-small">Phone: {{ announcement[0]['phone_number'] }}</div>
-                    <div class="italic-text padding-small">Card number: {{ announcement[0]['card_number'] }}</div>
+                    <div class="label-text padding-small">Контакти постраждалого:</div>
+                    <div class="italic-text padding-small">Ім'я: {{ victim['name'] }}</div>
+                    <div class="italic-text padding-small">Номер телефону: {{ announcement[0]['phone_number'] }}</div>
+                    <div class="italic-text padding-small">Номер картки: {{ announcement[0]['card_number'] }}</div>
                 </div>
             </div>
             <div class="flex">
@@ -45,6 +45,7 @@ export default {
         user: [Object, null],
         announcement: Array,
         images: Array,
+        victim: Array,
     },
 
     methods: {

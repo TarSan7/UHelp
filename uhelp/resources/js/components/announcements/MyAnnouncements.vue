@@ -1,10 +1,10 @@
 <template>
     <UserLayout :user="user" :active="'announcements'">
         <div class="center-position">
-            <div class="page-title-text">My Announcements</div>
+            <div class="page-title-text">Мої об'яви про допомогу</div>
             <div class="fundraising">
                 <div class="padding-top-button">
-                    <Button severity="secondary" @click="toogleAdd">Add new</Button>
+                    <Button severity="secondary" @click="toogleAdd">Створити</Button>
                 </div>
 
                 <DataTable
@@ -15,15 +15,15 @@
                     paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     tableStyle="min-width: 102rem"
                 >
-                    <Column field="title" header="Title"></Column>
-                    <Column field="short_info" header="Short information"></Column>
-                    <Column field="card_number" header="Card number"></Column>
-                    <Column field="phone_number" header="Phone number"></Column>
-                    <Column field="id"  style="width: 15%">
+                    <Column field="title" header="Назва"></Column>
+                    <Column field="short_info" header="Коротка інформація"></Column>
+                    <Column field="card_number" header="Номер карти"></Column>
+                    <Column field="phone_number" header="Номер телефону"></Column>
+                    <Column field="id"  style="width: 20%">
                         <template #body="{data}" class="justify-content-space-between">
-                            <Button v-if="data.is_active" severity="secondary" @click="toogle(data)">Edit</Button>
-                            <Button v-if="data.is_active" severity="secondary" @click="close(data)">Close</Button>
-                            <Button v-else severity="secondary" disabled>Closed</Button>
+                            <Button v-if="data.is_active" severity="secondary" @click="toogle(data)">Редагувати</Button>
+                            <Button v-if="data.is_active" severity="secondary" @click="close(data)">Закрити</Button>
+                            <Button v-else severity="secondary" disabled>Закритий</Button>
                         </template>
                     </Column>
                 </DataTable>

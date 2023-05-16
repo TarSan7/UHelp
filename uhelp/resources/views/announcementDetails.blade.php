@@ -13,6 +13,7 @@
         :user="{{ $user }}"
         :announcement="{{ $announcement }}"
         :images="{{ $images }}"
+        :victim="{{ $victim }}"
     />
 </div>
 </body>

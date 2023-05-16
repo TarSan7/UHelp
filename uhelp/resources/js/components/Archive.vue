@@ -1,7 +1,7 @@
 <template>
     <UserLayout :user="user" :active="'archive'">
         <div class="center-position">
-            <div class="page-title-text">Archived Fundraising</div>
+            <div class="page-title-text">Архів зборів</div>
             <div class="fundraising padding-top-button">
                 <DataTable
                     :value="fundraising"
@@ -11,12 +11,12 @@
                     paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     tableStyle="min-width: 102rem"
                 >
-                    <Column field="title" header="Title"></Column>
-                    <Column field="short_info" header="Short information"></Column>
-                    <Column field="cause" header="Close cause"></Column>
+                    <Column field="title" header="Назва"></Column>
+                    <Column field="short_info" header="Коротка інформація"></Column>
+                    <Column field="cause" header="Причина закриття"></Column>
                     <Column field="id" style="width: 10%">
                         <template #body="{data}">
-                            <Button severity="secondary" @click="toogle(data)">Details</Button>
+                            <Button severity="secondary" @click="toogle(data)">Деталі</Button>
                         </template>
                     </Column>
                 </DataTable>

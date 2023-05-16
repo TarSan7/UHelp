@@ -2,7 +2,6 @@
 
 namespace app\Http\Controllers;
 
-use App\Models\Document;
 use App\Models\Fundraising;
 use App\Models\FundraisingImage;
 use Carbon\Carbon;
@@ -99,7 +98,7 @@ class FundraisingController extends Controller
             'startDate' => ['required'],
             'sum'       => ['required'],
             'images'    => ['required'],
-            'link'      => ['required', 'string', 'regex:/^http[s]?:\/\/[a-zA-z\?\.-_0-9]*$/'],
+            'link'      => ['required', 'string', 'regex:/^http[s]?:\/\/[a-zA-z\?\.\-_\/0-9]*$/'],
         ]);
     }
 

@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div class="back-url">
-            <div class="text" onclick="window.location.replace('/')">Go back</div>
+            <div class="text" onclick="window.location.replace('/')">Повернутись</div>
             <img src="../../img/arrow-forward.svg" onclick="window.location.replace('/')">
         </div>
 
         <form class="login-form" method="POST" @submit.prevent="login" @keydown="errors.clear($event.target.name)">
-            <div class="title">Login</div>
+            <div class="title">Логін</div>
             <div class="fields">
-                <label for="email" class="input-label">Email</label>
+                <label for="email" class="input-label">Емейл</label>
                 <input
                     v-model="email"
                     type="email"
@@ -17,7 +17,7 @@
                 >
                 <span class="help is-danger" v-text="errors.get('email')"></span>
 
-                <label for="password" class="input-label">Password</label>
+                <label for="password" class="input-label">Пароль</label>
                 <input
                     v-model="password"
                     type="password"
@@ -25,13 +25,12 @@
                     class="input-field"
                 >
                 <span class="help is-danger" v-text="errors.get('password')"></span>
-                <a href="/" class="small-text">Forgot password?</a>
 
-                <button type="submit" class="main-button">Log In</button>
+                <button type="submit" class="main-button">Увійти</button>
                 <span class="help is-danger" v-text="errors.get('button')"></span>
                 <div class="small-text">
-                    Don`t have an account?
-                    <a href="/register" class="">Register</a>
+                    Не маєте акаунта?
+                    <a href="/register" class="">Зареєструватись</a>
                 </div>
             </div>
         </form>

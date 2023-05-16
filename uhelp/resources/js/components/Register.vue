@@ -1,28 +1,28 @@
 <template>
     <div class="container">
         <div class="back-url">
-            <div class="text" onclick="window.location.replace('/')">Go back</div>
+            <div class="text" onclick="window.location.replace('/')">Повернутися</div>
             <img src="../../img/arrow-forward.svg" onclick="window.location.replace('/')">
         </div>
 
         <form class="form-register" method="POST" @submit.prevent="register" @change="errors.clear($event.target.name)">
-            <div class="title">Register</div>
+            <div class="title">Реєстрація</div>
             <div class="field-group">
                 <div class="small-fields">
-                    <label for="name" class="input-label">Name</label>
+                    <label for="name" class="input-label">Повне ім'я</label>
                     <input v-model="name" type="text" name="name" id="name" class="small-input-field">
                     <span class="help is-danger" v-text="errors.get('name')"></span>
 
-                    <label for="email" class="input-label">Email</label>
+                    <label for="email" class="input-label">Емейл</label>
                     <input v-model="email" type="email" name="email" id="email" class="small-input-field">
                     <span class="help is-danger" v-text="errors.get('email')"></span>
 
-                    <label for="password" class="input-label">Password</label>
+                    <label for="password" class="input-label">Пароль</label>
                     <input v-model="password" type="password" name="password" id="password" class="small-input-field">
                     <span class="help is-danger" v-text="errors.get('password')"></span>
                 </div>
                 <div class="small-fields">
-                    <label for="account" class="input-label">Account type</label>
+                    <label for="account" class="input-label">Тип акаунту</label>
                     <select name="account" @change="setType($event)" id="account" class="small-input-field">
                         <option
                             v-for="(type, index) in types"
@@ -32,25 +32,25 @@
                     </select>
                     <span class="help is-danger" v-text="errors.get('account')"></span>
 
-                    <label for="phone" class="input-label">Phone number</label>
+                    <label for="phone" class="input-label">Номер телефону</label>
                     <input v-model="phone" type="text" name="phone" id="phone" class="small-input-field">
                     <span class="help is-danger" v-text="errors.get('phone')"></span>
 
-                    <label for="password" class="input-label">Confirm password</label>
+                    <label for="password" class="input-label">Підтвердіть пароль</label>
                     <input v-model="rePassword" type="password" name="password_confirmation" id="password2" class="small-input-field">
                     <span class="help is-danger" v-text="errors.get('password_confirmation')"></span>
                 </div>
             </div>
 
-            <label for="document" class="input-label">Attach official document</label>
+            <label for="document" class="input-label">Прикріпити офіційний документ</label>
             <input @change="setDocument($event)" type="file" accept="image/png" name="document" id="document">
             <span class="help is-danger" v-text="errors.get('document')"></span>
             <InlineMessage v-if="message.length" severity="success">{{ message }}</InlineMessage>
 
-            <button type="submit" class="main-button button-reg">Register</button>
+            <button type="submit" class="main-button button-reg">Реєстрація</button>
             <div class="small-text">
-                Already have an account?
-                <a href="/login" class="">Log in</a>
+                Вже маєте акаунт?
+                <a href="/login" class="">Увійти</a>
             </div>
         </form>
     </div>

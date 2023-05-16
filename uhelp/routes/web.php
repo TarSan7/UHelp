@@ -22,6 +22,7 @@ Route::get('/', function () {
         $img = Storage::get($image);
 
         return [
+            'id'      => $item->id,
             'title'   => $item->title,
             'content' => $item->short_info,
             'url'     =>  'data:image/png;base64,' . base64_encode($img)

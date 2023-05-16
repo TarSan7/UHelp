@@ -1,25 +1,25 @@
 <template>
     <UserLayout :user="user" :active="'announcements'">
         <div class="center-position">
-            <div v-if="id" class="page-title-text">Edit Announcement</div>
-            <div v-else class="page-title-text">Create Announcement</div>
+            <div v-if="id" class="page-title-text">Редагувати об'яву</div>
+            <div v-else class="page-title-text">Створити об'яву</div>
 
             <form method="POST" class="create-fundr" @keydown="errors.clear($event.target.name)">
                 <div class="flex start">
                     <div class="create-fundr">
-                        <label class="label-text" for="title">Title</label>
+                        <label class="label-text" for="title">Назва</label>
                         <InputText id="title" v-model="title"/>
                         <span class="help is-danger" v-text="errors.get('title')"></span>
                     </div>
 
                     <div class="create-fundr">
-                        <label class="label-text" for="card_number">Card Number</label>
+                        <label class="label-text" for="card_number">Номер картки</label>
                         <InputText v-model="card_number" />
                         <span class="help is-danger" v-text="errors.get('cardNumber')"></span>
                     </div>
 
                     <div class="create-fundr">
-                        <label class="label-text" for="phone_number">Phone Number</label>
+                        <label class="label-text" for="phone_number">Номер телефону</label>
                         <InputText id="phone_number" v-model="phone_number" placeholder="+380..." />
                         <span class="help is-danger" v-text="errors.get('phoneNumber')"></span>
                     </div>
@@ -27,21 +27,21 @@
                 <hr>
                 <div class="flex start">
                     <div class="create-fundr">
-                        <label class="label-text" for="info">Information</label>
+                        <label class="label-text" for="info">Інформація</label>
                         <Textarea v-model="info" rows="15" cols="50" />
-                        <small id="username-help">Enter full information about announcement.</small>
+                        <small id="username-help">Введіть повну інформацію про об'яву.</small>
                         <span class="help is-danger" v-text="errors.get('info')"></span>
                     </div>
 
                     <div class="create-fundr">
-                        <label class="label-text" for="shortInfo">Short Information</label>
+                        <label class="label-text" for="shortInfo">Коротка інформація</label>
                         <Textarea v-model="shortInfo" rows="8" cols="40" />
-                        <small id="username-help">Enter short information about announcement.</small>
+                        <small id="username-help">Введіть коротку інформацію про обяву.</small>
                         <span class="help is-danger" v-text="errors.get('shortInfo')"></span>
                     </div>
 
                     <div class="create-fundr">
-                        <label class="label-text" for="images">Images</label>
+                        <label class="label-text" for="images">Картинки</label>
                         <FileUpload
                             name="images"
                             @input="send"
@@ -53,7 +53,7 @@
                             :maxFileSize="1000000"
                         >
                             <template #empty>
-                                <p>Drag and drop files to here to upload.</p>
+                                <p>Перетащіть файли, щоб загрузити.</p>
                             </template>
                         </FileUpload>
                         <span class="help is-danger" v-text="errors.get('images')"></span>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="flex start">
                     <div v-if="images" class="create-fundr">
-                        <label class="label-text" for="images">Uploaded Images</label>
+                        <label class="label-text" for="images">Завантажені картинки</label>
                         <div class="flex center" v-for="image in images">
                             <Image :src="image" width="100"/>
                             <img class="cross-button" src="../../../img/cross.svg" @click="removeUploaded(image)">
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="buttons padding-top-button start">
-                    <Button severity="secondary" @click="create">Save</Button>
-                    <Button severity="secondary" @click="back">Back</Button>
+                    <Button severity="secondary" @click="create">Зберегти</Button>
+                    <Button severity="secondary" @click="back">Повернутись</Button>
                 </div>
             </form>
         </div>

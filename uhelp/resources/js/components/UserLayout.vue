@@ -34,10 +34,10 @@
                 <div class="dropdown-menu" @click="hide = !hide">
                     <img src="../../img/dropdown.svg">
                     <div v-if="!hide" class="dropdown-content">
-                        <a v-if="user['account_type_id'] === 1" class="text" href="/members">Members</a>
-                        <a v-if="user['account_type_id'] === 2" class="text" href="/my-fundraising">My fundraising</a>
-                        <a v-if="user['account_type_id'] === 3" class="text" href="/my-announcements">My announcements</a>
-                        <a class="text" href="/logout">Log out</a>
+                        <a v-if="user['account_type_id'] === 1" class="text" href="/members">Користувачі</a>
+                        <a v-if="user['account_type_id'] === 2" class="text" href="/my-fundraising">Мої збори</a>
+                        <a v-if="user['account_type_id'] === 3" class="text" href="/my-announcements">Мої об'яви</a>
+                        <a class="text" href="/logout">Вийти</a>
                     </div>
                 </div>
             </div>
