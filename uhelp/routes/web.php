@@ -60,6 +60,8 @@ Route::get('/announcements', [App\Http\Controllers\HelpsController::class, 'allA
 
 Route::get('/map', [App\Http\Controllers\MapController::class, 'getMap']);
 
+Route::post('/payment', [App\Http\Controllers\StripeController::class, 'payment']);
+
 Route::group(['middleware' => 'auth:web'], function() {
     Route::get('/add-map', [App\Http\Controllers\MapController::class, 'addMap']);
     Route::post('/create-map', [App\Http\Controllers\MapController::class, 'create']);

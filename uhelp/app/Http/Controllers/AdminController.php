@@ -3,21 +3,13 @@
 namespace app\Http\Controllers;
 
 use App\Models\AccountType;
-use App\Models\AnnouncementImage;
-use App\Models\Announcements;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-use function PHPUnit\Framework\matches;
 
 class AdminController extends Controller
 {
@@ -38,7 +30,7 @@ class AdminController extends Controller
 
     /**
      * @param int $id
-     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @return Application|Factory|View
      */
     public function watchMember(int $id)
     {
@@ -57,21 +49,47 @@ class AdminController extends Controller
 
     /**
      * @param int $id
-     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @return View
      */
     public function approve(int $id): view
     {
         User::where('id', $id)->update(['approved' => 1]);
 
+        $details = [
+            'title' => 'Реєстрація на платформі Ukraine Help',
+            'body'  => 'Ваші документи були переглянуті та
+                        затверджені. Тепер ви можете увійти на платформу. Раді привітати Вас в родині UHelp!'
+        ];
+
+        $this->sendMail($details, User::where('id', $id)->get('email')->first());
+
         return $this->members();
     }
 
     /**
+     * @param $details
+     * @param $email
+     * @return void
+     */
+    private function sendMail($details, $email)
+    {
+        Mail::to($email)->send(new \App\Mail\MyTestMail($details));
+    }
+
+    /**
      * @param int $id
-     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @return View
      */
     public function reject(int $id): view
     {
+        $details = [
+            'title' => 'Реєстрація на платформі Ukraine Help',
+            'body'  => 'Вашу заявку було скасовано через проблеми з документами. Перевірте документи та
+                       спробуйте ще раз.'
+        ];
+
+        $this->sendMail($details, User::where('id', $id)->get('email')->first());
+
         User::where('id', $id)->delete();
 
         return $this->members();

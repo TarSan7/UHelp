@@ -9,11 +9,14 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
 class RegisterController extends Controller
 {
@@ -31,7 +34,20 @@ class RegisterController extends Controller
 
         !$user->approved || Auth::attempt(['email' => $user->email, 'password' => $request->get('password')]);
 
+        $details = [
+            'title' => 'Реєстрація на платформі Ukraine Help',
+            'body' => 'Ви успішно подали заявку на реєстрацію на платформі. Ваші документи будуть переглянуті та
+                        невдовзі прийде лист з результатом розгляду заяви.'
+        ];
+
+        $this->sendMail($details, $request->get('email'));
+
         return new JsonResponse(['message' => 'Admin will check your account and contact.'], 201);
+    }
+
+    private function sendMail($details, $email)
+    {
+        Mail::to($email)->send(new \App\Mail\MyTestMail($details));
     }
 
     /**
@@ -73,9 +89,9 @@ class RegisterController extends Controller
 
             Document::create([
                 'account_type_id' => $data['accountId'],
-                'user_id' => $user->id,
-                'document' => 'documents/' . $user->id,
-                'status' => Document::SENT_STATUS,
+                'user_id'         => $user->id,
+                'document'        => 'documents/' . $user->id,
+                'status'          => Document::SENT_STATUS,
             ]);
 
             $base64Image = str_replace('data:image/png;base64,', '', $data['document']);
@@ -86,6 +102,9 @@ class RegisterController extends Controller
         return $user;
     }
 
+    /**
+     * @return View|Redirector
+     */
     public function getRegister()
     {
         if (Auth::user()) {

@@ -22524,7 +22524,6 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     handle: function handle(item) {
-      console.log('ss');
       this.activeItem = item;
       this.infoWindowOpened = true;
     },
@@ -23345,6 +23344,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserLayout.vue */ "./resources/js/components/UserLayout.vue");
 /* harmony import */ var primevue_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primevue/carousel */ "./node_modules/primevue/carousel/carousel.esm.js");
 /* harmony import */ var primevue_progressbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/progressbar */ "./node_modules/primevue/progressbar/progressbar.esm.js");
+/* harmony import */ var primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/inputtext */ "./node_modules/primevue/inputtext/inputtext.esm.js");
+/* harmony import */ var primevue_inputnumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! primevue/inputnumber */ "./node_modules/primevue/inputnumber/inputnumber.esm.js");
+/* harmony import */ var primevue_inlinemessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! primevue/inlinemessage */ "./node_modules/primevue/inlinemessage/inlinemessage.esm.js");
+/* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
+/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Errors */ "./resources/js/Errors.js");
+
+
+
+
+
 
 
 
@@ -23353,7 +23362,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UserLayout: _UserLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Carousel: primevue_carousel__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ProgressBar: primevue_progressbar__WEBPACK_IMPORTED_MODULE_2__["default"]
+    ProgressBar: primevue_progressbar__WEBPACK_IMPORTED_MODULE_2__["default"],
+    InputText: primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Button: primevue_button__WEBPACK_IMPORTED_MODULE_6__["default"],
+    InputNumber: primevue_inputnumber__WEBPACK_IMPORTED_MODULE_4__["default"],
+    InlineMessage: primevue_inlinemessage__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
     user: [Object, null],
@@ -23361,7 +23374,38 @@ __webpack_require__.r(__webpack_exports__);
     images: Array,
     volunteer: Object
   },
-  methods: {}
+  data: function data() {
+    return {
+      name: '',
+      number: '',
+      month: 1,
+      year: 2023,
+      cvv: '',
+      sum: 0,
+      months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      years: [2023, 2024, 2025, 2026, 2027, 2028, 2028, 2029, 2030],
+      errors: new _Errors__WEBPACK_IMPORTED_MODULE_7__.Errors(),
+      message: ''
+    };
+  },
+  methods: {
+    sendForm: function sendForm(event) {
+      var _this = this;
+      axios.post('/payment', {
+        'fullName': this.name,
+        'cardNumber': this.number,
+        'month': this.month,
+        'year': this.year,
+        'cvv': this.cvv,
+        'sum': this.sum
+      })["catch"](function (error) {
+        return _this.errors.record(error.response.data.errors);
+      }).then(function (e) {
+        console.log(e.data);
+        _this.message = e.data.message;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -25681,42 +25725,107 @@ var _hoisted_12 = {
   "class": "slot-text padding-small"
 };
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Статус збору: ");
-var _hoisted_14 = {
-  "class": "flex"
-};
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "label-text padding-small"
+}, "Волонтер, відповідальний за збір:", -1 /* HOISTED */);
 var _hoisted_15 = {
-  key: 0,
-  "class": "padding-small donate fundr-info"
+  "class": "italic-text padding-small"
 };
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_16 = {
+  "class": "italic-text padding-small"
+};
+var _hoisted_17 = {
+  "class": "flex-center"
+};
+var _hoisted_18 = {
+  key: 0
+};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "label-text padding-small"
 }, "Ви можете доєднатись та задонатити тут:", -1 /* HOISTED */);
-var _hoisted_17 = ["href"];
-var _hoisted_18 = {
+var _hoisted_20 = {
+  "class": "paymentForm"
+};
+var _hoisted_21 = {
+  "class": "create-fundr"
+};
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "label-text-small",
+  "for": "username"
+}, "Повне ім'я (на карті)", -1 /* HOISTED */);
+var _hoisted_23 = ["textContent"];
+var _hoisted_24 = {
+  "class": "create-fundr"
+};
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "label-text-small",
+  "for": "cardNumber"
+}, "Номер карти", -1 /* HOISTED */);
+var _hoisted_26 = {
+  "class": "input-group"
+};
+var _hoisted_27 = ["textContent"];
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "input-group-append"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "input-group-text text-muted"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fab fa-cc-visa fa-lg pr-1"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fab fa-cc-amex fa-lg pr-1"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fab fa-cc-mastercard fa-lg"
+})])], -1 /* HOISTED */);
+var _hoisted_29 = {
+  "class": "flex"
+};
+var _hoisted_30 = {
+  "class": "create-fundr"
+};
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "label-text-small"
+}, "Термін дії", -1 /* HOISTED */);
+var _hoisted_32 = {
+  "class": "flex"
+};
+var _hoisted_33 = {
+  "class": "create-fundr"
+};
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "label-text-small",
+  "data-toggle": "tooltip",
+  title: "",
+  "data-original-title": "3 digits code on back side of the card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("CVV "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-question-circle"
+})], -1 /* HOISTED */);
+var _hoisted_35 = ["textContent"];
+var _hoisted_36 = {
+  "class": "create-fundr"
+};
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "label-text-small",
+  "for": "summ"
+}, "Сума переказу", -1 /* HOISTED */);
+var _hoisted_38 = ["textContent"];
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Донат!");
+var _hoisted_40 = {
   key: 1,
   "class": "padding-small donate fundr-info"
 };
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "italic-text red padding-small"
 }, "Цей збір був закритий", -1 /* HOISTED */);
-var _hoisted_20 = {
+var _hoisted_42 = {
   "class": "label-text padding-small"
-};
-var _hoisted_21 = {
-  "class": "donate fundr-info"
-};
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "label-text padding-small"
-}, "Волонтер, відповідальний за збір:", -1 /* HOISTED */);
-var _hoisted_23 = {
-  "class": "italic-text padding-small"
-};
-var _hoisted_24 = {
-  "class": "italic-text padding-small"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Carousel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Carousel");
   var _component_ProgressBar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ProgressBar");
+  var _component_InputText = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputText");
+  var _component_InputNumber = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputNumber");
+  var _component_InlineMessage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InlineMessage");
+  var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
   var _component_UserLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UserLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UserLayout, {
     user: $props.user,
@@ -25739,10 +25848,84 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }, 8 /* PROPS */, ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['title']), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['info']), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, "Дата початку: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['start_date']), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, "Сума збору: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['sum']) + " UAH", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, "Залишилося зібрати: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['remaining_amount']) + " UAH", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProgressBar, {
         value: ($props.fundraising[0]['sum'] - $props.fundraising[0]['remaining_amount']) / $props.fundraising[0]['sum'] * 100
-      }, null, 8 /* PROPS */, ["value"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [$props.fundraising[0]['is_active'] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-        "class": "donate-button button right-align",
-        href: $props.fundraising[0]['link']
-      }, "Донат!", 8 /* PROPS */, _hoisted_17)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, "Причина: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['cause']), 1 /* TEXT */)])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, "Ім'я: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.volunteer['name']), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, "Номер телефону: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.volunteer['phone']), 1 /* TEXT */)])])])];
+      }, null, 8 /* PROPS */, ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, "Ім'я: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.volunteer['name']), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, "Номер телефону: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.volunteer['phone']), 1 /* TEXT */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [$props.fundraising[0]['is_active'] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+        modelValue: $data.name,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $data.name = $event;
+        }),
+        "class": "form-control width-card",
+        name: "fullName",
+        placeholder: "Повне ім'я"
+      }, null, 8 /* PROPS */, ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": "help is-danger",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.get('name'))
+      }, null, 8 /* PROPS */, _hoisted_23)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+        modelValue: $data.number,
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return $data.number = $event;
+        }),
+        "class": "form-control width-card",
+        name: "cardNumber",
+        placeholder: "Номер карти"
+      }, null, 8 /* PROPS */, ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": "help is-danger",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.get('number'))
+      }, null, 8 /* PROPS */, _hoisted_27), _hoisted_28])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.month = $event;
+        }),
+        "class": "select"
+      }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.months, function (one) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(one), 1 /* TEXT */);
+      }), 256 /* UNKEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.month]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $data.year = $event;
+        }),
+        "class": "select"
+      }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.years, function (one) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(one), 1 /* TEXT */);
+      }), 256 /* UNKEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.year]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+        modelValue: $data.cvv,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.cvv = $event;
+        }),
+        type: "number",
+        "class": "form-control",
+        placeholder: "CVV",
+        name: "cvv"
+      }, null, 8 /* PROPS */, ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": "help is-danger",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.get('cvv'))
+      }, null, 8 /* PROPS */, _hoisted_35)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputNumber, {
+        modelValue: $data.sum,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $data.sum = $event;
+        }),
+        inputId: "currency-us",
+        mode: "currency",
+        currency: "UAH"
+      }, null, 8 /* PROPS */, ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": "help is-danger",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.get('sum'))
+      }, null, 8 /* PROPS */, _hoisted_38), $data.message.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InlineMessage, {
+        key: 0,
+        severity: "success"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1 /* TEXT */)];
+        }),
+
+        _: 1 /* STABLE */
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        severity: "primary",
+        "class": "margin-top-button",
+        onClick: $options.sendForm
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_39];
+        }),
+        _: 1 /* STABLE */
+      }, 8 /* PROPS */, ["onClick"])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, "Причина: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fundraising[0]['cause']), 1 /* TEXT */)]))])])];
     }),
 
     _: 1 /* STABLE */

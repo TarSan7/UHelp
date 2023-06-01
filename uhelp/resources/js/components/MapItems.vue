@@ -60,7 +60,6 @@ export default {
         },
 
         handle(item) {
-            console.log('ss')
             this.activeItem = item;
             this.infoWindowOpened = true;
         },
